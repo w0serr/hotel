@@ -3,12 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Hotel Profile</title>
+  <title>Hotel Profile Edit</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <header>
     <div class="header">
       <a href="index.html">
@@ -41,25 +40,25 @@
       </div>
     </div>
   </header>
-
   <div class="wrapper">
     <div class="profile-container">
-      <h1>Профиль</h1>
-      <div class="profile-info">
-        <h2>Информация о пользователе</h2>
-        <p>Имя: <span id="profile-name"></span></p>
-        <p>Почта: <span id="profile-email"></span></p>
-        <p>Телефон: <span id="profile-phone"></span></p>
-      </div>
-      <div class="profile-actions">
-        <div class="profil-button">
-          <button class="buttonprof">Изменить данные</button>
-          <button class="buttonprof">История бронирований</button>
+      <h1>Редактирование профиля</h1>
+      <form id="editProfileForm">
+        <div id="qwe">
+          <div class="form-group">
+            <input type="text" id="edit-name" placeholder="Имя">
+          </div>
+          <div class="form-group">
+            <input type="email" id="edit-email" placeholder="Почта">
+          </div>
+          <div class="form-group">
+            <input type="text" id="edit-phone" placeholder="Телефон">
+          </div>
         </div>
-      </div>
+        <button type="submit" class="button">Сохранить изменения</button>
+      </form>
     </div>
   </div>
-
   <div class='footer'>
     <div class="links">
       <a href="#" class="link">Забронировать отель</a>
@@ -69,9 +68,7 @@
       <a href="#" class="link">Связаться</a>
     </div>
   </div>
-
   <script src="script.js"></script>
-
   <script>
     // Загружаем информацию о пользователе из localStorage
     const name = localStorage.getItem('name');
@@ -79,11 +76,28 @@
     const phone = localStorage.getItem('phone');
 
     // Выводим информацию о пользователе на страницу
-    document.getElementById('profile-name').textContent = name;
-    document.getElementById('profile-email').textContent = email;
-    document.getElementById('profile-phone').textContent = phone;
-  </script>
+    document.getElementById('edit-name').value = name;
+    document.getElementById('edit-email').value = email;
+    document.getElementById('edit-phone').value = phone;
 
+    // Обработка формы редактирования профиля
+    const editProfileForm = document.getElementById('editProfileForm');
+    editProfileForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const newName = document.getElementById('edit-name').value;
+      const newEmail = document.getElementById('edit-email').value;
+      const newPhone = document.getElementById('edit-phone').value;
+
+      // Сохраняем изменения в localStorage
+      localStorage.setItem('name', newName);
+      localStorage.setItem('email', newEmail);
+      localStorage.setItem('phone', newPhone);
+
+      // Перенаправляем пользователя на страницу профиля
+      window.location.href = 'profile.html';
+    });
+  </script>
 </body>
 
 </html>

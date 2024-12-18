@@ -3,12 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Hotel Profile</title>
+  <title>Hotel Booking History</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <header>
     <div class="header">
       <a href="index.html">
@@ -41,25 +40,13 @@
       </div>
     </div>
   </header>
-
   <div class="wrapper">
     <div class="profile-container">
-      <h1>Профиль</h1>
-      <div class="profile-info">
-        <h2>Информация о пользователе</h2>
-        <p>Имя: <span id="profile-name"></span></p>
-        <p>Почта: <span id="profile-email"></span></p>
-        <p>Телефон: <span id="profile-phone"></span></p>
-      </div>
-      <div class="profile-actions">
-        <div class="profil-button">
-          <button class="buttonprof">Изменить данные</button>
-          <button class="buttonprof">История бронирований</button>
-        </div>
-      </div>
+      <h1>История бронирований</h1>
+      <ul id="bookingList">
+      </ul>
     </div>
   </div>
-
   <div class='footer'>
     <div class="links">
       <a href="#" class="link">Забронировать отель</a>
@@ -69,21 +56,32 @@
       <a href="#" class="link">Связаться</a>
     </div>
   </div>
-
   <script src="script.js"></script>
-
   <script>
-    // Загружаем информацию о пользователе из localStorage
-    const name = localStorage.getItem('name');
-    const email = localStorage.getItem('email');
-    const phone = localStorage.getItem('phone');
+    // Функция для добавления элемента в список бронирований
+    function addBookingToList(hotelName, dates, guests) {
+      const bookingList = document.getElementById('bookingList');
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+        <h2>${hotelName}</h2>
+        <p>Даты: ${dates}</p>
+        <p>Гости: ${guests}</p>
+      `;
+      bookingList.appendChild(listItem);
+    }
 
-    // Выводим информацию о пользователе на страницу
-    document.getElementById('profile-name').textContent = name;
-    document.getElementById('profile-email').textContent = email;
-    document.getElementById('profile-phone').textContent = phone;
+    // Пример данных бронирований (замените на реальные данные)
+    const bookings = [
+      {hotelName: 'Grand Hotel', dates: '2023-10-20 - 2023-10-25', guests: '2'},
+      {hotelName: 'The Ritz-Carlton', dates: '2023-11-10 - 2023-11-15', guests: '3'},
+      {hotelName: 'Hyatt Regency', dates: '2023-12-05 - 2023-12-10', guests: '1'}
+    ];
+
+    // Добавляем бронирования в список
+    bookings.forEach(booking => {
+      addBookingToList(booking.hotelName, booking.dates, booking.guests);
+    });
   </script>
-
 </body>
 
 </html>
